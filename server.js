@@ -30,7 +30,7 @@ mongoose.connect(db, mongoUpdate).then(() => {
     console.log("Succesfully connected to mLAB db")
 }).catch((err) => {
     // handles connection error
-    console.log(`Problem connecting to mLAB db\nError: ${err}`);
+    console.log(`${err}`);
 });
 
 // Loading route middleware
