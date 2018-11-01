@@ -33,8 +33,6 @@ mongoose.connect(db, mongoUpdate).then(() => {
     console.log(`Problem connecting to mLAB db\nError: ${err}`);
 });
 
-require("./models/user");
-
 // Loading route middleware
 app.use("/api/users", users);
 app.use("/api/profile", profile);
