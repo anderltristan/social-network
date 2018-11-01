@@ -19,15 +19,8 @@ app.use(bodyParser.json());
 // Loading middelware from passport
 app.use(passport.initialize());
 require('./config/passport.js')(passport);
-// Setting up port for heroku deployment, using 5000 for local development
-const PORT = process.env.PORT || 5000;
 // Getting the mLAB URI from config directory
 const db = require('./config/keys').mongoURI;
-
-// Starting the server on PORT
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
 
 // Connection to the mLAB db using mongodb connection method
 // .connect(database, options)...
@@ -52,7 +45,15 @@ if (process.env.NODE_ENV === 'production') {
     // Setting static folder
     app.use(express.static('client/build'));
 
-    app.get('*', (req.res) => {
+    app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
+
+// Setting up port for heroku deployment, using 5000 for local development
+const PORT = process.env.PORT || 5000;
+
+// Starting the server on PORT
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
