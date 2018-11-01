@@ -4,7 +4,7 @@
   "description": "social app",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
+    "start": "node server.js",
     "server": "nodemon server.js",
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
