@@ -1,4 +1,5 @@
-module.exports = {
-    // connection string from mLAB
-    mongoURI: 'mongodb://tristan:talv1998@ds143163.mlab.com:43163/social_app'
-}; 
+if (process.env.NODE_ENV === 'production') {
+    module.exports = require('./prod_keys');
+} else {
+    module.exports = require('./dev_keys');
+}

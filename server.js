@@ -1,5 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const path = require('path');
 const users = require('./routes/api/users.js');
 const profile = require('./routes/api/profile.js');
 const posts = require('./routes/api/posts.js');
@@ -10,6 +13,12 @@ const mongoUpdate = {
 
 // Creating instance of express app
 const app = express();
+// Loading middleware from body-parser package
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+// Loading middelware from passport
+app.use(passport.initialize());
+require('./config/passport.js')(passport);
 // Setting up port for heroku deployment, using 5000 for local development
 const PORT = process.env.PORT || 5000;
 // Getting the mLAB URI from config directory
@@ -31,10 +40,19 @@ mongoose.connect(db, mongoUpdate).then(() => {
     console.log(`Problem connecting to mLAB db\nError: ${err}`);
 });
 
+require("./models/user");
+
+// Loading route middleware
 app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/posts", posts);
 
-app.get('/', (req, res) => {
-    res.send('Hello');
-});
+// Serving to production
+if (process.env.NODE_ENV === 'production') {
+    // Setting static folder
+    app.use(express.static('client/build'));
+
+    app.get('*', (req.res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
