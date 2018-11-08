@@ -2,6 +2,52 @@ img {
   width: 100%;
 }
 
+.bg-dark,
+.bg-info {
+    background-color: #b31a1a !important;
+}
+
+a {
+  color: #b31a1a;
+}
+
+a:hover {
+  color: #a81201;
+  text-decoration: none;
+}
+
+.text-info {
+  color: #b31a1a !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255,255,255,.8);
+}
+
+.btn-info {
+  background-color: #a81201 !important;
+  border-color: #a81201 !important;
+}
+
+.btn-info:hover {
+  background-color: #b31a1a !important;
+  border-color: #b31a1a !important;
+}
+
+.btn-light,
+.btn-dark {
+  background-color: #b4b4b4 !important;
+  border-color: #b4b4b4 !important;
+  color: #fff !important;
+}
+
+.btn-light:hover,
+.btn-dark:hover {
+  background-color: #414141 !important;
+  border-color: #414141 !important;
+  color: #fff !important;
+}
+
 .landing {
   position: relative;
   background: url('./img/showcase.jpg') no-repeat;
